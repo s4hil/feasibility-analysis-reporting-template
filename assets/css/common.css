@@ -1,0 +1,17 @@
+/* Resets */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+:root {
+	--white: #f5f5f8;
+	--dark-blue: #012efe;
+	--grey: #b0b0cf;
+	--dark: #030a21;
+	--light-blue: #5a8ff6;
+	--dark-purple: #162863;
+	--light-purple: #2c50b4;
+	--pink: #cd6f79;
+}
