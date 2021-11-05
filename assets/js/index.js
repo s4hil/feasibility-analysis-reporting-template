@@ -59,7 +59,7 @@ $(document).ready(()=>{
 										<b>`+ count++ +`.</b>
 										`+ x[i].question + `
 									</label>
-									<select class="form-control">
+									<select class="form-control" name=`+ x[i].q_id +`>
 										<option value="none">Select</option>
 										<option value="1">1</option>
 										<option value="2">2</option>

@@ -1,3 +1,16 @@
+<?php
+	// DB Connection
+	class DB extends SQLITE3
+	{
+		
+		function __construct()
+		{
+			$this->open('assets/db/the_db.sqlite');
+		}
+	}
+	$db = new DB();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,7 +49,7 @@
 		<section class="main-content">
 			<div class="container">
 				<div class="form-container">
-					<form class="main-form">
+					<form class="main-form" method="POST" action="?">
 						<h6 class="step-progress">Step <span id="current-step">1</span>/7</h6>
 						<div class="step step-questions">
 							<h2 class="step-header d-flex"><div id="step-name"></div></h2>
@@ -47,13 +60,25 @@
 
 						<!-- Step Navigation -->
 						<div class="d-flex justify-content-end mt-4">
-							<button id="showPrevStep" disabled class="btn btn-lg btn-secondary mr-3 disabled">
-								<i class="fas fa-arrow-left"></i> Back 
+							<button class="btn btn-lg btn-primary" id="showNextStep">
+								<i class="fas fa-arrow-right"></i> Next Step
 							</button>
-							<button class="btn btn-lg btn-primary" id="showNextStep">Next Step</button>
-							<button class="btn btn-lg btn-success" style="display: none;" id="submitForm">Finish</button>
+							<button style="display: none;" class="btn btn-lg btn-success" id="submitForm" name="submitForm">Finish</button>
 						</div>
 					</form>
+					<?php 
+						if (isset($_POST['submitForm'])) {
+							$response = "";
+							foreach ($_POST as $key => $field) {
+								$response .= $key . " = " . $field . " | "; 
+							}
+							$response = str_replace("| submitForm =  | ", "", $response);
+							$sql = "INSERT INTO `_submissions` (`response`) VALUES(
+											'$response'
+										)";
+							$res = $db->exec($sql);
+						}
+					?>
 				</div>
 			</div>
 		</section>
