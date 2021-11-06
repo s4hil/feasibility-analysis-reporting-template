@@ -82,7 +82,12 @@
 			justify-content: center;
 			align-items: center;
 		}
-
+		.home-tab {
+			display: none;
+		}
+		.submissions-tab {
+			flex-direction: column;
+		}
 	</style>
 </head>
 <body>
@@ -138,8 +143,20 @@
 				</div>
 			</div>
 		</section>
-		<section class="tab submissions-tab" tab-name="submissions-tab" style="display: none">
+		<section class="container-fluid tab submissions-tab p-4" tab-name="submissions-tab">
 			<h1 class="alert alert-info">Submissions</h1>
+			<table class="table table-striped">
+				<thead class="table-dark text-white">
+					<tr>
+						<th>S.no</th>
+						<th>Name</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody id="submissions-table">
+					<!-- To be populated by js -->
+				</tbody>
+			</table>
 		</section>
 	</main>
 
@@ -284,10 +301,42 @@
 
 			$('.tab').css('display', 'none');
 			
-
 			let name = $(this).attr('tab-target');
 			$('section[tab-name="' + name + '"]').fadeIn();
-		})
+		});
+
+		// Fetch submissions
+		function loadSubmissions() {
+			let output = "";
+			let count = 1;
+			$.ajax({
+				url: "../assets/phpStuff/fetchSubmissions.php",
+				method: "GET",
+				dataType: "json",
+				success: function (data) {
+					console.log(data);
+					if (data.status == true) {
+						x = data.data;
+						for (let i = 0; i < x.length; i++){
+							output += `<tr>
+									<td>`+ count++ +`</td>
+									<td>`+ x[i].name +`</td>
+									<td>
+										<button class='btn btn-info'>View</button>
+										<button class='btn btn-danger'>Delete</button>
+									</td>
+								</tr>`;
+						}
+						$("#submissions-table").html(output);
+					}
+
+				},
+				error: function () {
+					console.log("Err wd fetch submissions req!");
+				}
+			});
+		}
+		loadSubmissions();
 	</script>
 </body>
 </html>

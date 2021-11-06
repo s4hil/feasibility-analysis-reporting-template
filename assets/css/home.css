@@ -1,0 +1,122 @@
+body {
+	font-family: 'Open Sans', sans-serif;
+}
+
+.wrapper {
+	width: 100%;
+	height: 100vh;
+	display: flex;
+}
+
+.nav-header {
+	height: 10%;
+	padding: 1rem;
+	color: white;
+	font-weight: 700;
+	font-size: 1.5rem;
+}
+
+.side-bar {
+	height: 100%;
+	width: 25%;
+	background: var(--dark);
+}
+
+.main-content {
+	padding: 1rem;
+	width: 75%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.main-content .container {
+	border: 1px solid var(--grey);
+	border-radius: 5px;
+	height: 90%;
+}
+
+.steps-nav {
+	width: 100%;
+	height: 90%;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	padding: 1rem;
+
+}
+.steps-nav ul {
+	width: 100%;
+	list-style-type: none;
+	display: flex;
+	flex-direction: column;
+	color: #fff;
+}
+
+.steps-nav ul li{
+	margin-top: 2rem;
+	display: flex;
+	align-items: center;
+}
+
+.steps-nav ul li div {
+	width: 30px;
+	height: 30px;
+	border: 1px solid white;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-right: .5rem;
+}
+.inactive {
+	color: var(--grey);
+	font-weight: 400;
+	opacity: 0.6;
+}
+.active-step {
+	color: var(--white);
+	font-weight: 600;
+	opacity: 1;
+}
+
+.form-container {
+	height: 100%;
+}
+
+.main-form {
+	height: 100%;
+	padding: .5rem;
+}
+
+
+/* STEPS */
+
+.step-header {
+	font-weight: 700;
+}
+
+.step {
+	padding: .5rem;
+}
+
+.step .fields {
+	margin-top: 3rem;
+}
+
+.step-progress {
+	color: grey;
+}
+
+
+.form-group {
+	display: flex;
+}
+
+.form-group label {
+	flex: 6;
+}
+.form-group .form-control {
+	flex: 1;
+}
