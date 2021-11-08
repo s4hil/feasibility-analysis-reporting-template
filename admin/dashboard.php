@@ -88,6 +88,15 @@
 		.submissions-tab {
 			flex-direction: column;
 		}
+		.questions-list {
+			list-style-type: none;
+		}
+		.header {
+			width: 100%;
+			align-items: center;
+		}
+		#exportBtn {
+		}
 	</style>
 </head>
 <body>
@@ -144,12 +153,18 @@
 			</div>
 		</section>
 		<section class="container-fluid tab submissions-tab p-4" tab-name="submissions-tab">
-			<h1 class="alert alert-info">Submissions</h1>
+			<div class="alert alert-info d-flex justify-content-between header">
+				<h1><i class="fas fa-paperplane"></i> Submissions</h1>
+				<a href="exportSubmissions.php" class="btn btn-warning" target="_blank">
+					<i class="fas fa-table"> </i> Export Data
+				</a>
+			</div>
 			<table class="table table-striped">
 				<thead class="table-dark text-white">
 					<tr>
 						<th>S.no</th>
 						<th>Name</th>
+						<th>Email</th>
 						<th>Action</th>
 					</tr>
 				</thead>
@@ -160,7 +175,24 @@
 		</section>
 	</main>
 
+	<!-- Submission Modal -->
+	<div class="modal fade" id="submission-modal" tabindex="-1" aria-labelledby="submission-modal" aria-hidden="true">
+	  <div class="modal-dialog modal-xl">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="submission-by"></i></h5>
+	      </div>
+	      <div class="modal-body" id="submission-info">
+	     
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+
 	<script src="../assets/js/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="../assets/js/dashboard.js"></script>
 	<script>
 		// Manage navbar
@@ -310,19 +342,19 @@
 			let output = "";
 			let count = 1;
 			$.ajax({
-				url: "../assets/phpStuff/fetchSubmissions.php",
+				url: "../assets/phpStuff/fetchUsers.php",
 				method: "GET",
 				dataType: "json",
 				success: function (data) {
-					console.log(data);
 					if (data.status == true) {
 						x = data.data;
 						for (let i = 0; i < x.length; i++){
 							output += `<tr>
 									<td>`+ count++ +`</td>
 									<td>`+ x[i].name +`</td>
+									<td>`+ x[i].email +`</td>
 									<td>
-										<button class='btn btn-info'>View</button>
+										<button class='btn btn-info view-btn' user-id='`+ x[i].user_id +`'>View</button>
 										<button class='btn btn-danger'>Delete</button>
 									</td>
 								</tr>`;
@@ -337,6 +369,44 @@
 			});
 		}
 		loadSubmissions();
+
+		// Display Submission Modal
+		$("#submissions-table").on('click', '.view-btn', function () {
+			let id = $(this).attr('user-id');
+			const data = JSON.stringify({ user_id:id });
+			let output = "";
+			$.ajax({
+				url: "../assets/phpStuff/fetchSubmission.php",
+				method: "POST",
+				data: data,
+				dataType: "json",
+				success: function (data) {
+					console.log(data);
+					if (data.status == true) {
+						$("#submission-by").text(data.userName);
+						x = data.data;
+						for(let i = 0; i < x.length; i++){
+							output += `
+								<li>
+									Id: <b>`+ x[i].q_id +`</b><br>
+									`+ x[i].question +`<br>
+									<span class='badge badge-success'>Ans:</span> <b>`+ x[i].answer +`</b>
+
+								</li>
+								<hr>
+							`;
+						}
+						output = "<ul class='questions-list'>"+ output +"</ul>";
+						$("#submission-info").html(output);
+						$("#submission-modal").modal('show');
+					}
+				},
+				error: function () {
+					console.log("err wd fetch submission req");
+				}
+
+			});
+		});
 	</script>
 </body>
 </html>

@@ -5,7 +5,7 @@
 	$response = array();
 	$rows = array();
 
-	$sql = "SELECT * FROM `_users` ORDER BY `user_id` DESC";
+	$sql = "SELECT * FROM `_users`";
 	$res = $db->query($sql);
 	if ($res) {
 		while ($row = $res->fetchArray(SQLITE3_ASSOC)) {

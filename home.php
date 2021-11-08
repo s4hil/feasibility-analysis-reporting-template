@@ -92,9 +92,11 @@
 										)";
 								$res = $db->exec($sql);
 								if ($res) {
+										// Setting session vars for analysis
+										$_SESSION['responseStr'] = $response;
 									?>
 										<script>
-											window.location = "index.php";
+											window.location = "analysis.php";
 											alert("Submission Received!");
 										</script>
 									<?php
