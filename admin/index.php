@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Login V10</title>
+	<title>Admin - FART</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
@@ -27,7 +27,6 @@
 		.wrapper {
 			width: 100vw;
 			height: 100vh;
-			border: 1px solid red;
 			display: flex;
 			justify-content: center;
 			align-items: center;
@@ -71,6 +70,20 @@
 
 	<main class="wrapper">
 		<div class="form-container">
+			<?php
+			include 'adminAuth.php';
+			if (isset($_SESSION['msg'])) {
+				?>
+				<div class="alert alert-danger"><i class="fas fa-exclamation-circle"></i>
+					<?php
+						echo $_SESSION['msg'];
+						unset($_SESSION['msg']);
+					?>
+				</div>
+				<?php
+			}
+
+			?>
 			<header>Login - Admin</header>
 			<form class="form" action="adminAuth.php" method="POST">
 				<fieldset class="form-group">
@@ -79,9 +92,9 @@
 				</fieldset>
 				<fieldset class="form-group">
 					<i class="fas fa-lock"></i>
-					<input type="text" name="username" class="input-box" placeholder="Password">
+					<input type="text" name="password" class="input-box" placeholder="Password">
 				</fieldset>
-				<button class="login-btn btn btn-success form-control">Login</button>
+				<button name="login" type="submit" class="login-btn btn btn-success form-control">Login</button>
 			</form>
 		</div>
 	</main>

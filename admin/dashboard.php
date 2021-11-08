@@ -1,3 +1,15 @@
+<?php
+include 'adminAuth.php';
+	if (isset($_SESSION['loginStatus'])) {
+		if ($_SESSION['loginStatus'] != true) {
+			die("Get Out!");
+		}
+	}
+	else {
+		die("Get Out");
+	}
+?>	
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -109,10 +121,22 @@
 			<li tab-target="submissions-tab" class="tab-btn">
 				<i class="fas fa-database"></i> Submissions
 			</li>
+			<li>
+				<a href="?logout" class="btn btn-danger">
+					<i class="fas fa-power-off"></i> Logout
+				</a>
+				<?php
+					if (isset($_GET['logout'])) {
+						session_destroy();
+						header('location: index.php');
+					}
+				?>
+			</li>
 		</ul>
 	</aside>
 	<main>
 		<nav class="main-nav bg-dark"></nav>
+
 		<section class="tab home-tab" tab-name="questions-tab">
 			<div class="container-fluid row d-flex justify-content-center mt-5">
 				<div class="form-col col col-sm-12 col-md-4 col-lg-4">

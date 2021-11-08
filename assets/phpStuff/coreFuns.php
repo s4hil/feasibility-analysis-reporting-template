@@ -1,6 +1,4 @@
 <?php
-	header("Access-Control-Allow-Origin");
-	header("Access-Control-Allowed-Methods: POST, GET");
   session_start();
 
 	// DB connection 
