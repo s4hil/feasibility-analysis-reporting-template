@@ -107,7 +107,10 @@ include 'adminAuth.php';
 			width: 100%;
 			align-items: center;
 		}
-		#exportBtn {
+		@media only screen and (max-width: 768px){
+			.mobile-hidden {
+				display: none;
+			}
 		}
 	</style>
 </head>
@@ -139,7 +142,7 @@ include 'adminAuth.php';
 
 		<section class="tab home-tab" tab-name="questions-tab">
 			<div class="container-fluid row d-flex justify-content-center mt-5">
-				<div class="form-col col col-sm-12 col-md-4 col-lg-4">
+				<div class="form-col col-sm-12 col-md-4 col-lg-4">
 					<h2 class="alert alert-info">Add Question</h2>
 					<form class="form">
 						<fieldset class="form-group">
@@ -188,7 +191,7 @@ include 'adminAuth.php';
 					<tr>
 						<th>S.no</th>
 						<th>Name</th>
-						<th>Email</th>
+						<th class="mobile-hidden">Email</th>
 						<th>Action</th>
 					</tr>
 				</thead>
@@ -376,7 +379,7 @@ include 'adminAuth.php';
 							output += `<tr>
 									<td>`+ count++ +`</td>
 									<td>`+ x[i].name +`</td>
-									<td>`+ x[i].email +`</td>
+									<td class='mobile-hidden'>`+ x[i].email +`</td>
 									<td>
 										<button class='btn btn-info view-btn' user-id='`+ x[i].user_id +`'>View</button>
 										<button class='btn btn-danger'>Delete</button>

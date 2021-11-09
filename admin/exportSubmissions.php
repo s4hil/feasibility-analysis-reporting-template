@@ -1,4 +1,17 @@
 <?php
+include 'adminAuth.php';
+	if (isset($_SESSION['loginStatus'])) {
+		if ($_SESSION['loginStatus'] != true) {
+			die("Get Out!");
+		}
+	}
+	else {
+		die("Get Out");
+	}
+?>	
+
+<?php
+
 	class DB extends sqlite3
 	{
 		function __construct()
