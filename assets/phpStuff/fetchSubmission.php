@@ -1,12 +1,4 @@
 <?php
-/*
-	When I wrote this code only God and I knew how it worked now only God knows.
-
-	Hours wasted on the project = 28;
-*/
-
-
-
 	header('Content-Type: application/json; charset=utf-8');
 	require_once 'coreFuns.php';
 
@@ -16,7 +8,6 @@
 	$data = json_decode(file_get_contents("php://input"), true);
 
 	$user_id = clean($data['user_id']);
-	// $user_id = 5513;
 
 	$sql = "SELECT * FROM `_submissions` WHERE `user_id` = '$user_id' LIMIT 1";
 	$res = $db->query($sql);
