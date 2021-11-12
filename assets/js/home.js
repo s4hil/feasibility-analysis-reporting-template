@@ -26,12 +26,31 @@ $(document).ready(()=>{
 	}
 	loadStepsNav();
 
+	// Poping an alert to user
+	function popAlert(msg) {
+		$("#msg").html("<i class='fas fa-exclamation-circle'></i> "+msg);
+		$("#msg").fadeIn();
+		setTimeout(function () {
+			$("#msg").fadeOut();
+		}, 1500);
+	}
+
+	// Validate Select
+	$('.step-questions').on('blur', '.check-option', function () {
+		if ($(this).val() == "") {
+			popAlert("All Fields Are Required!");
+			$(this).focus();
+			$("#showNextStep").prop('disabled', true);
+		}
+		else {
+			$("#showNextStep").prop('disabled', false);
+		}
+	});
+
 	// Loading step questions
 	function loadStep(stepToShow) {
 
 		// Changing steps nav state
-
-
 		let data = JSON.stringify({ step:stepToShow });
 		let output = "";
 		$.ajax({
@@ -54,12 +73,12 @@ $(document).ready(()=>{
 					if (data.count > 0) {
 						for(let i = 0; i < x.length; i++){
 							output += `
-								<fieldset class="form-group step-`+ stepToShow +`">
+								<fieldset class="form-group step-field step-`+ stepToShow +`">
 									<label>
-										<b>`+ count++ +`.</b>
+										<b class='question-number'>`+ count++ +`.</b>
 										`+ x[i].question + `
 									</label>
-									<select onblur="checkInput(e)" class="form-control" name=`+ x[i].q_id +`>
+									<select required class="form-control check-option" name=`+ x[i].q_id +`>
 										<option value="">Select</option>
 										<option value="1">1</option>
 										<option value="2">2</option>
@@ -79,13 +98,12 @@ $(document).ready(()=>{
 					setTimeout(function () {
 						$(".nav-step-"+stepToShow).addClass('active-step');
 						let a = $(".nav-step-"+(Number(stepToShow)-1).toString()).addClass('text-success');
-						console.log(a);
 					},500)
 				}
 				else {
 					output = "Query Error!";
 				}
-				$('.step-questions').append("<div class='step-"+ stepToShow +"'>"+output+"</div>");
+				$('.step-questions').append("<div class='step-box step-"+ stepToShow +"'>"+output+"</div>");
 				let prevStep = stepToShow - 1;
 				$(".step-"+prevStep).hide();
 			},
@@ -100,16 +118,18 @@ $(document).ready(()=>{
 	// Display next step on click
 	$("#showNextStep").click((e)=>{
 		e.preventDefault();
-			
-		$("#showPrevStep").attr("disabled", false);
+			$("#showPrevStep").prop('disabled', false);
 
-		let currentStep = $("#current-step").text();
-		let stepToHide = "step-" + currentStep;
-		let stepToShow = "step-" + (Number(currentStep)+1);
+			let currentStep = $("#current-step").text();
+			let stepToHide = "step-" + currentStep;
+			let stepToShow = "step-" + (Number(currentStep)+1);
 
-		loadStep(Number(currentStep)+1);
-		$("#current-step").text(stepToShow.replace("step-", ""));
+
+			loadStep(Number(currentStep)+1);
+			$("#current-step").text(stepToShow.replace("step-", ""));
+
 	});
+
 
 	// Display Previous step
 	$("#showPrevStep").click((e)=>{
@@ -119,5 +139,15 @@ $(document).ready(()=>{
 
 		loadStep(Number(currentStep) - 1);
 	})
+
+	// Submit form
+	$("#submitForm").click(()=>{
+		$(".step-box").show();
+		$(".question-number").hide();
+		$(".step-field").css("display", 'flex');
+
+		// $(".wrapper").css('height', '100%');
+		// $(".side-bar").css('height', '100%');
+	});
 
 }); // Main

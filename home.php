@@ -34,8 +34,32 @@
 
 	<!-- Font Awesome -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"/>
+	<style>
+		#msg {
+			position: absolute;
+			top: 10px;
+			right: 10px;
+			padding: 1rem;
+			border-radius: 7px;
+			font-weight: 700;
+			display: none;
+		}
+
+		.wrapper {
+			height: 100vh;
+			overflow: hidden;
+		}
+		.side-bar {
+			height: 100%;
+		}
+		.step-questions {
+			height: 80%;
+			overflow: scroll;
+		}
+	</style>
 </head>
 <body>
+	<div id="msg" class="alert alert-danger"></div>
 	<main class="wrapper">
 		<aside class="side-bar">
 			<header class="nav-header">FART</header>
@@ -49,7 +73,7 @@
 			</nav>
 		</aside>
 		<section class="main-content">
-			<div class="container">
+			<div class="container q-container">
 				<div class="form-container">
 					<form class="main-form" method="POST" action="?">
 						<h6 class="step-progress">Step <span id="current-step">1</span>/7</h6>
@@ -62,10 +86,10 @@
 
 						<!-- Step Navigation -->
 						<div class="d-flex justify-content-end mt-4">
-							<button class="btn btn-lg btn-primary" id="showNextStep">
+							<button class="btn btn-lg btn-primary ml-2" id="showNextStep">
 								<i class="fas fa-arrow-right"></i> Next Step
 							</button>
-							<button style="display: none;" class="btn btn-lg btn-success" id="submitForm" name="submitForm">Finish</button>
+							<button style="display: none;" class="btn btn-lg btn-success" id="submitForm" name="submitForm" onerror="popAlert('hi')">Finish</button>
 						</div>
 					</form>
 					<?php 

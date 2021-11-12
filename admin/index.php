@@ -64,6 +64,11 @@
 		.login-btn {
 			margin-top: 2rem;
 		}
+		@media only screen and (max-width: 768px){
+			.form-container {
+				width: 90%;
+			}
+		}
 	</style>
 </head>
 <body>
@@ -92,7 +97,7 @@
 				</fieldset>
 				<fieldset class="form-group">
 					<i class="fas fa-lock"></i>
-					<input type="text" name="password" class="input-box" placeholder="Password">
+					<input type="password" name="password" class="input-box" placeholder="Password">
 				</fieldset>
 				<button name="login" type="submit" class="login-btn btn btn-success form-control">Login</button>
 			</form>
