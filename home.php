@@ -54,7 +54,7 @@
 		}
 		.step-questions {
 			height: 80%;
-			overflow: scroll;
+			overflow-y: scroll;
 		}
 	</style>
 </head>

@@ -22,6 +22,7 @@ include 'adminAuth.php';
 	<!-- CSS -->
 	<link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="../assets/css/common.css">
+	<link rel="stylesheet" type="text/css" href="../assets/css/dashboard.css">
 	<!-- <link rel="stylesheet" type="text/css" href="../assets/css/dashboard.css"> -->
 
 	<!-- Google Fonts -->
@@ -32,96 +33,6 @@ include 'adminAuth.php';
 	<!-- Font Awesome -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"/>
 
-	<style>
-		body {
-			overflow-x: hidden;
-			display: flex;
-		}
-		main {
-			width: 100%;
-			height: 100%;
-		}
-		.main-nav {
-			width: 100%;
-			height: 10vh;
-		}
-		.side-bar {
-			width: 200px;
-			height: 100vh;
-			position: absolute;
-			left: -200px;
-			transition: all .3s ease;
-			z-index: 1;
-		}
-		.nav-list {
-			margin-top: 2rem;
-			padding: 1rem;
-			list-style-type: none;
-		}
-		.nav-list li{
-			padding: .5rem;
-			color: #fff;
-		}
-		.nav-list li:hover {
-			background: #fff;
-			color: grey;
-			cursor: pointer;
-		}
-		#navBtn {
-			width: 40px;
-			height: 40px;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			border: 1px solid grey;
-			border-radius: 4px;
-			color: #fff;
-			font-size: 1.5rem;
-			position: absolute;
-			left: 210px;
-			top: 10px;
-			z-index: 1;
-			cursor: pointer;
-		}
-		.show-nav{
-			left: 0px;
-		}
-
-		.tab {
-			width: 100%;
-			height: 100%;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-		}
-		.home-tab {
-			display: none;
-		}
-		.submissions-tab {
-			flex-direction: column;
-		}
-		.questions-list {
-			list-style-type: none;
-		}
-		.header {
-			width: 100%;
-			align-items: center;
-		}
-
-		#msg {
-			position: fixed;
-			top: 10px;
-			right: 10px;
-			display: none;
-		}
-
-		@media only screen and (max-width: 768px){
-			.mobile-hidden {
-				display: none;
-			}
-		}
-
-	</style>
 </head>
 <body>
 	<aside class="side-bar bg-dark">
