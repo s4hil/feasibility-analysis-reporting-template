@@ -52,7 +52,7 @@ $(document).ready(()=>{
 						$("#questions-table-body").html(output);
 					}
 					else {
-						console.log(data.msg);
+						// console.log(data.msg);
 					}
 				},
 				error: function () {
@@ -167,8 +167,8 @@ $(document).ready(()=>{
 									<td>`+ x[i].name +`</td>
 									<td class='mobile-hidden'>`+ x[i].email +`</td>
 									<td>
-										<button class='btn btn-info view-btn' user-id='`+ x[i].user_id +`'>View</button>
-										<button class='btn btn-danger del-btn' user-id='`+ x[i].user_id +`'>Delete</button>
+										<button class='btn btn-info view-btn' user-id='`+ x[i].user_id +`'><i class='fas fa-file'></i> View</button>
+										<button class='btn btn-danger del-btn' user-id='`+ x[i].user_id +`'><i class='fas fa-trash'></i> Delete</button>
 									</td>
 								</tr>`;
 						}
@@ -194,9 +194,9 @@ $(document).ready(()=>{
 				data: data,
 				dataType: "json",
 				success: function (data) {
-					console.log(data);
 					if (data.status == true) {
-						$("#submission-by").text(data.userName);
+						$("#submission-by").html("<i class='fas fa-user'></i> "+ data.userName);
+						$("#score").html("<i class='fas fa-chart-bar'></i> " + data.score);
 						x = data.data;
 						for(let i = 0; i < x.length; i++){
 							output += `

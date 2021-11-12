@@ -5,6 +5,19 @@
 	$response = array();
 	$rows = array();
 
+	function getResponseScore($str)
+	{
+		$sum = 0;
+		$str_array = explode('|', $str);
+
+		for ($i = 0; $i < count($str_array); $i++) { 
+			$arr = explode('=', $str_array[$i]);
+			$num = str_replace(' ', '', $arr[1]);
+			$sum += (int)$num;
+		}
+		return $sum;
+	}
+
 	$data = json_decode(file_get_contents("php://input"), true);
 
 	$user_id = clean($data['user_id']);
@@ -27,11 +40,11 @@
 			$question = getQuestionById($qid);
 			$question['answer'] = $answer;
 			$rows[] = $question;
-
 		}
 
 		$response['status'] = true;
 		$response['userName'] = getUserNameById($user_id);
+		$response['score'] = getResponseScore($userResponse);
 		$response['data'] = $rows;
 
 

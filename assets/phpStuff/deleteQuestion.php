@@ -4,19 +4,34 @@
 
 	$response = array();
 
-	$data = json_decode(file_get_contents("php://input"), true);
+	if (isset($_SESSION['loginStatus'])) {
+		if ($_SESSION['loginStatus'] == true) {
 
-	$id = clean($data['q_id']);
+			$data = json_decode(file_get_contents("php://input"), true);
 
-	$sql = "DELETE FROM `_questions` WHERE `q_id` = '$id'";
-	$res = $db->exec($sql);
-	if ($res) {
-		$response['status'] = true;
-		$response['msg'] = "Question Deleted!";
+			$id = clean($data['q_id']);
+
+			$sql = "DELETE FROM `_questions` WHERE `q_id` = '$id'";
+			$res = $db->exec($sql);
+			if ($res) {
+				$response['status'] = true;
+				$response['msg'] = "Question Deleted!";
+			}
+			else {
+				$response['status'] = false;
+				$response['msg'] = "Failed to delete!";
+			}
+		}
+		else {
+			$response['status'] = false;
+			$response['msg'] = "Unauthorized User!";
+		}
 	}
 	else {
 		$response['status'] = false;
-		$response['msg'] = "Failed to delete!";
+		$response['msg'] = "Unauthorized!";
 	}
+
+	
 	echo json_encode($response);
 ?>

@@ -216,7 +216,8 @@ include 'adminAuth.php';
 	  <div class="modal-dialog modal-xl">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h5 class="modal-title" id="submission-by"></i></h5>
+	        <h5 class="modal-title" id="submission-by"></i></h5><h4 id="score"></h4>
+	        </h4>
 	      </div>
 	      <div class="modal-body" id="submission-info">
 	     

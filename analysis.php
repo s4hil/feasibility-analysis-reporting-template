@@ -11,7 +11,7 @@ session_start();
 	
 	$db = new DB();
 
-	function processResponseStr($str)
+	function getResponseScore($str)
 	{
 		$sum = 0;
 		$str_array = explode('|', $str);
@@ -39,11 +39,11 @@ session_start();
 	$sum = "";
 
 	if (isset($_SESSION['responseStr'])) {
-		$sum = processResponseStr($_SESSION['responseStr']);
+		$sum = getResponseScore($_SESSION['responseStr']);
 
 		$maxVal = getStepsSum();
 		$feasibilityPercentage = round($sum / $maxVal * 100, 2);
-		session_destroy();
+		unset($_SESSION['responseStr']);
 	}
 ?>
 
