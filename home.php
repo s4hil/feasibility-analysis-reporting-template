@@ -56,6 +56,15 @@
 			height: 80%;
 			overflow-y: scroll;
 		}
+		@media only screen and (max-width: 768px){
+			aside.side-bar {
+				display: none;
+			}
+			.main-content {
+				width: 100%;
+			}
+			
+		}
 	</style>
 </head>
 <body>
