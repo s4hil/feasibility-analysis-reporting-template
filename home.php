@@ -74,7 +74,6 @@
 			<header class="nav-header">FART</header>
 			<nav class="steps-nav">
 				<ul class="steps-nav-list">
-					
 					<li class="inactive">
 						<div>2</div> Technical Feasibility
 					</li>
@@ -88,6 +87,7 @@
 						<h6 class="step-progress">Step <span id="current-step">1</span>/7</h6>
 						<div class="step step-questions">
 							<h2 class="step-header d-flex"><div id="step-name"></div></h2>
+							<p id="step-detail"></p>
 							<div class="fields">
 								<!-- To be populated by js -->
 							</div>
@@ -98,7 +98,7 @@
 							<button class="btn btn-lg btn-primary ml-2" id="showNextStep">
 								<i class="fas fa-arrow-right"></i> Next Step
 							</button>
-							<button style="display: none;" class="btn btn-lg btn-success" id="submitForm" name="submitForm" onerror="popAlert('hi')">Finish</button>
+							<button style="display: none;" class="btn btn-lg btn-success" id="submitForm" name="submitForm">Finish</button>
 						</div>
 					</form>
 					<?php 
@@ -107,21 +107,25 @@
 							$userInfo = $_SESSION['userInfo'];
 							$name = $userInfo['name'];
 							$email = $userInfo['email'];
-							$sql1 = "INSERT INTO `_users` (`user_id`, `name`, `email`) VALUES (
+							$country = $userInfo['country'];
+							$sql1 = "INSERT INTO `_users` (`user_id`, `name`, `email`, `country`) VALUES (
 									'$id',
 									'$name',
-									'$email'
+									'$email',
+									'$country'
 									)";
 							$res1 = $db->exec($sql1);
 							if ($res1) {
 								$response = "";
 								foreach ($_POST as $key => $field) {
-									$response .= $key . " = " . $field . " | "; 
+									$response .= $key . " = " . $field . " | ";
 								}
 								$response = str_replace("| submitForm =  | ", "", $response);
-								$sql = "INSERT INTO `_submissions` (`response`, `user_id`) VALUES(
+								$timestamp = date("F j, Y, g:i a");
+								$sql = "INSERT INTO `_submissions` (`response`, `user_id`, `timestamp`) VALUES 	  (
 												'$response',
-												'$id'
+												'$id',
+												'$timestamp'
 										)";
 								$res = $db->exec($sql);
 								if ($res) {

@@ -35,26 +35,7 @@ include 'adminAuth.php';
 
 </head>
 <body>
-	<aside class="side-bar bg-dark">
-		<div id="navBtn"><i class="fas fa-bars"></i></div>
-		<ul class="nav-list">
-			<li tab-target="submissions-tab" class="tab-btn">
-				<i class="fas fa-database"></i> Submissions
-			</li>
-			<li tab-target="questions-tab" class="tab-btn">
-				<i class="fas fa-paperclip"></i> Questions
-			</li>
-			<a href="?logout" class="btn btn-danger mt-2">
-				<i class="fas fa-power-off"></i> Logout
-			</a>
-			<?php
-				if (isset($_GET['logout'])) {
-					session_destroy();
-					header('location: index.php');
-				}
-			?>
-		</ul>
-	</aside>
+	<?php include '../assets/snippets/sidebar.php'; ?>
 	<main>
 		<!-- For displaying alerts -->
 		<div id="msg" class="alert alert-warning"><i class="fas fa-info-circle"></i></div>
@@ -63,9 +44,6 @@ include 'adminAuth.php';
 		<section class="container-fluid tab submissions-tab p-4" tab-name="submissions-tab">
 			<div class="alert alert-info d-flex justify-content-between header">
 				<h1><i class="fas fa-paperplane"></i> Submissions</h1>
-				<a href="exportSubmissions.php" class="btn btn-warning" target="_blank">
-					<i class="fas fa-table"> </i> Export Data
-				</a>
 			</div>
 			<table class="table table-striped">
 				<thead class="table-dark text-white">
@@ -99,7 +77,6 @@ include 'adminAuth.php';
 						</fieldset>
 						<fieldset class="form-group">
 							<button class="btn btn-primary form-control" id="addQuestion">Save</button>
-						</fieldset>
 					</form>
 				</div>
 				<div class="col col-sm-12 col-md-8 col-lg-8">
@@ -138,6 +115,37 @@ include 'adminAuth.php';
 	      </div>
 	    </div>
 	  </div>
+	</div>
+
+	  <!-- Edit Question Modal -->
+	  <div class="modal fade" tabindex="-1" id="modal">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title">Edit Question</h5>
+	      </div>
+	      <div class="modal-body">
+	      		<form class="form">
+		     		<input id="e-q-id" class="form-control">
+		     		<fieldset>
+		     			<label>Question</label>
+		     			<textarea id="e-question" rows="3" class="form-control"></textarea>
+		     		</fieldset>
+		     		<fieldset>
+		     			<label>Step</label>
+		     			<select class="form-control" id="e-steps"></select>
+		     		</fieldset>
+		     		<fieldset class="mt-3">
+		     			<button class="btn btn-success" id="update-question">Update</button>
+		     		</fieldset>
+		     	</form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 
 	<script src="../assets/js/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>

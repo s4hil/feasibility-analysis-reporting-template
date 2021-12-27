@@ -21,11 +21,13 @@
 		}
 		$response['data'] = $rows;
 		$response['count'] = $count;
-		if (fetchStepNameById($step) == "") {
+		if (fetchStepDetailsById($step) == "") {
 			$response['step_name'] = 0;
 		}
 		else{
-			$response['step_name'] = fetchStepNameById($step);
+			$step_details = fetchStepDetailsById($step);
+			$response['step_name'] = $step_details['name'];
+			$response['step_detail'] = $step_details['detail'];
 		}
 		$response['total_steps'] = fetchTotalSteps();
 	}

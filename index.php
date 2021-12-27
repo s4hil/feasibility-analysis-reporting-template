@@ -1,7 +1,3 @@
-<?php
-	
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +17,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 	<!-- Font Awesome -->
-	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"/> -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"/>
 
 	<link href="https://fonts.googleapis.com/css?family=Heebo:400,500,700|Fira+Sans:600" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
@@ -29,25 +25,25 @@
     <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
 
 	<style>
+		body, html, .is-boxed {
+			margin: 0px;
+			padding: 0px;
+		}
 		.wrapper {
 			font-family: 'Open Sans', sans-serif;
 			width: 100vw;
 			height: 100vh;
 		}
-		.start-btn {
-			background: rgb(2,0,36);
-			background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgba(0,212,255,1) 100%);
-			color: white;
-			padding: 1rem;
-			border: none;
-			border-radius: 2rem;
-			outline: none;
+		#start-btn {
+			font-size: 1.5rem;
+			padding: 2rem 3rem;
+			line-height: 0;
 		}
 	</style>
 </head>
 
 <body class="is-boxed has-animations">
-    <div class="body-wrap boxed-container">
+    <div class="body-wrap">
         <header class="site-header">
 			<div class="header-shape header-shape-1">
 				<svg width="337" height="222" viewBox="0 0 337 222" xmlns="http://www.w3.org/2000/svg">
@@ -114,12 +110,12 @@
                     <div class="hero-inner">
 						<div class="hero-copy">
 	                        <h1 class="hero-title mt-0">Feasibility Analysis Reporting Template</h1>
-	                        <p class="hero-paragraph">The FART is a checklist designed by Dr Lukman Raimi to assist students, aspiring entrepreneurs and established entrepreneurs to carry out a lean feasibility analysis (LFA).</p>
+	                        <p class="hero-paragraph">The FART is a checklist designed to assist students, aspiring entrepreneurs and established entrepreneurs to carry out a lean feasibility analysis (LFA).</p>
 							<div class="hero-form field field-grouped">
 								<div class="control">
-									<a id="start-btn" class="button button-primary button-block">
+									<button id="start-btn" class="button button-primary button-block">
 										Start
-									</a>
+									</button>
 								</div>
 							</div>
 						</div>
@@ -423,6 +419,12 @@
 		        	<label>Email</label>
 		        	<input type="email" name="email" class="form-control" placeholder="Enter Email ID">
 		        </fieldset>
+		        <fieldset class="form-group">
+		        	<label>Country</label>
+		        	<select id="country-list" type="text" name="country" class="form-control">
+		        		<!-- To be populated by JS -->
+		        	</select>
+		        </fieldset>
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -439,6 +441,29 @@
     <script>
     	$("#start-btn").click((e)=>{
     		$("#startModal").modal('show');
+    	});
+
+    	$(document).ready(()=>{
+    		function loadCountries() {
+    			let output = "<option value='0'>Select</option>";
+    			$.ajax({
+    				url: "https://restcountries.com/v2/all",
+    				method: "GET",
+    				dataType: "json",
+    				success: function (data) {
+    					let x = data;
+    					for(let i = 0; i < x.length; i++){
+    						output += "<option value='"+ x[i].name +"'>"+ x[i].name +"</option>";
+    					}
+    					console.log(output);
+    					$("#country-list").html(output);
+    				},
+    				error: function () {
+    					console.log("Error fetching countries!");
+    				}
+    			});
+    		}
+    		loadCountries();
     	});
     </script>
 </body>

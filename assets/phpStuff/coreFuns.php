@@ -11,14 +11,14 @@
     }
 
     // Find step name by id
-    function fetchStepNameById($id)
+    function fetchStepDetailsById($id)
     {
     	global $db;
     	$sql = "SELECT * FROM `_steps` WHERE `step_id` = '$id' LIMIT 1";
     	$res = $db->query($sql);
     	if ($res) {
-    	 	$name = $res->fetchArray(SQLITE3_ASSOC)['name'];
-    	 	return $name;
+        $userInfo = $res->fetchArray(SQLITE3_ASSOC);
+    	 	return $userInfo;
     	}
     	else {
     		return false;

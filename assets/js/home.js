@@ -68,6 +68,7 @@ $(document).ready(()=>{
 					}
 
 					$("#step-name").text(" "+data.step_name);
+					$("#step-detail").text(" "+data.step_detail);
 					let x = data.data;
 					let count = 1;
 					if (data.count > 0) {
@@ -79,7 +80,7 @@ $(document).ready(()=>{
 										`+ x[i].question + `
 									</label>
 									<select required class="form-control check-option" name=`+ x[i].q_id +`>
-										<option value="">Select</option>
+										<option value="10">10</option>
 										<option value="1">1</option>
 										<option value="2">2</option>
 										<option value="3">3</option>

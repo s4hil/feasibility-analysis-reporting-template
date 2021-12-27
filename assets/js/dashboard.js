@@ -43,6 +43,9 @@ $(document).ready(()=>{
 									<td>`+ x[i].question.substr(0,50)+"..."+ `</td>
 									<td>`+ x[i].step_id +`</td>
 									<td>
+										<button class='btn-sm btn btn-warning edit-btn' q-id='`+ x[i].q_id +`''> 
+											<i class='fas fa-edit'></i> Edit
+										</button>
 										<button class='btn-sm btn btn-danger del-btn' q-id='`+ x[i].q_id +`''> 
 											<i class='fas fa-trash-alt'></i> Delete
 										</button>
@@ -114,6 +117,69 @@ $(document).ready(()=>{
 				}
 
 			});
+		});
+
+		// Fetch Question Details
+		$("#questions-table-body").on('click', '.edit-btn', function () {
+
+			let id = $(this).attr("q-id");
+			let data = JSON.stringify({ q_id:id });
+			$.ajax({
+				url: "../assets/phpStuff/fetchQuestionDetails.php",
+				method: "POST",
+				data: data,
+				dataType: "json",
+				success: function (data) {
+					console.log(data);
+					let x = data;
+					if (data.status == true) {
+						$("#modal").modal("show");
+
+						// Populate details
+						$("#e-q-id").val(x['data'].q_id);
+						$("#e-question").val(x['data'].question);
+							
+						let output = `
+							<option value='`+ x['data'].step_id +`'>`+ x['data'].step +`</option>
+						`;
+
+						$("#e-steps").html(output);
+					}
+					else {
+						console.log(data.msg);
+					}
+				},
+				error: function () {
+					console.log("Err wd fetch request");
+				}
+			});		
+		});
+
+		// Update question details on click
+		$("#updateQuestion").click((e)=>{
+			e.preventDefault();
+
+			let q_id = $("#q-id-field").val();
+			let question = $("#question-text").val();
+			let data = JSON.stringify({ id:q_id, question:question });
+
+			$.ajax({
+				url: "../assets/phpStuff/updateQuestion.php",
+				method: "POST",
+				data: data,
+				dataType: "json",
+				success: function () {
+					if (data.status == true) {
+						$("#updateQuestion").hide();
+						$("#addQuestion").show();
+						$(".form")[0].reset();
+					}
+				},
+				error: function () {
+					console.log("err with update req");
+				}
+			});
+
 		});
 
 		// Delete question on click
