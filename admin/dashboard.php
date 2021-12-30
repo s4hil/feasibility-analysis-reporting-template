@@ -136,7 +136,7 @@ include 'adminAuth.php';
 		     			<select class="form-control" id="e-steps"></select>
 		     		</fieldset>
 		     		<fieldset class="mt-3">
-		     			<button class="btn btn-success" id="update-question">Update</button>
+		     			<button class="btn btn-success" id="updateQuestion">Update</button>
 		     		</fieldset>
 		     	</form>
 	      </div>

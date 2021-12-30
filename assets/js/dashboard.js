@@ -130,7 +130,6 @@ $(document).ready(()=>{
 				data: data,
 				dataType: "json",
 				success: function (data) {
-					console.log(data);
 					let x = data;
 					if (data.status == true) {
 						$("#modal").modal("show");
@@ -159,8 +158,8 @@ $(document).ready(()=>{
 		$("#updateQuestion").click((e)=>{
 			e.preventDefault();
 
-			let q_id = $("#q-id-field").val();
-			let question = $("#question-text").val();
+			let q_id = $("#e-q-id").val();
+			let question = $("#e-question").val();
 			let data = JSON.stringify({ id:q_id, question:question });
 
 			$.ajax({
@@ -168,11 +167,10 @@ $(document).ready(()=>{
 				method: "POST",
 				data: data,
 				dataType: "json",
-				success: function () {
+				success: function (data) {
 					if (data.status == true) {
-						$("#updateQuestion").hide();
-						$("#addQuestion").show();
-						$(".form")[0].reset();
+						$("#modal").modal("hide");
+						loadQuestionsTable();
 					}
 				},
 				error: function () {
