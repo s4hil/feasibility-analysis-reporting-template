@@ -40,7 +40,8 @@ $(document).ready(()=>{
 						for(let i = 0; i < x.length; i++){
 							output += `<tr>
 									<td>`+ count++ +`</td>
-									<td>`+ x[i].question.substr(0,50)+"..."+ `</td>
+									<td>`+ x[i].question.substr(0,20)+"..."+ `</td>
+									<td>`+ x[i].q_id +`</td>
 									<td>`+ x[i].step_id +`</td>
 									<td>
 										<button class='btn-sm btn btn-warning edit-btn' q-id='`+ x[i].q_id +`''> 
@@ -53,6 +54,10 @@ $(document).ready(()=>{
 								</tr>`;
 						}
 						$("#questions-table-body").html(output);
+						$("#questions-table").dataTable({
+							"autoWidth": true,
+							"pageLength": 20,
+						});
 					}
 					else {
 						// console.log(data.msg);

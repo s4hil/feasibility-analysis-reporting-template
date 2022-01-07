@@ -62,13 +62,13 @@
 			}
 			.main-content {
 				width: 100%;
-			}
-			
+			}	
 		}
+
 	</style>
 </head>
 <body>
-	<div id="msg" class="alert alert-danger"></div>
+	<div id="msg" class="alert alert-warning"></div>
 	<main class="wrapper">
 		<aside class="side-bar">
 			<header class="nav-header">FART</header>
@@ -123,9 +123,9 @@
 								$response = str_replace("| submitForm =  | ", "", $response);
 								$timestamp = date("F j, Y, g:i a");
 								$sql = "INSERT INTO `_submissions` (`response`, `user_id`, `timestamp`) VALUES 	  (
-												'$response',
-												'$id',
-												'$timestamp'
+											'$response',
+											'$id',
+											'$timestamp'
 										)";
 								$res = $db->exec($sql);
 								if ($res) {

@@ -1,3 +1,34 @@
+// Poping an alert to user
+	function popAlert(msg) {
+		$("#msg").html("<i class='fas fa-exclamation-circle'></i> "+msg);
+		$("#msg").fadeIn();
+		setTimeout(function () {
+			$("#msg").fadeOut();
+		}, 1500);
+	}
+
+// Add step comment
+function addComment(elm) {
+	let step = $(elm).attr('step-id');
+	let comment = $(elm).closest('.form-group').find('.comment').val();
+	let data = JSON.stringify({ step_id:step, comment_val:comment });
+
+	$.ajax({
+		url: "assets/phpStuff/addStepAttachments.php",
+		method: "POST",
+		data: data,
+		dataType: "json",
+		success: function (data) {
+			if (data.status == true) {
+				popAlert(data.msg);
+				$(elm).closest('.form-group').find('.comment').val("");
+			}
+		},
+		error: function () {
+			console.log("err wd comment req");
+		}
+	});
+}
 $(document).ready(()=>{
 
 	// fetch steps for side nav
@@ -26,15 +57,6 @@ $(document).ready(()=>{
 	}
 	loadStepsNav();
 
-	// Poping an alert to user
-	function popAlert(msg) {
-		$("#msg").html("<i class='fas fa-exclamation-circle'></i> "+msg);
-		$("#msg").fadeIn();
-		setTimeout(function () {
-			$("#msg").fadeOut();
-		}, 1500);
-	}
-
 	// Validate Select
 	$('.step-questions').on('blur', '.check-option', function () {
 		if ($(this).val() == "") {
@@ -46,6 +68,22 @@ $(document).ready(()=>{
 			$("#showNextStep").prop('disabled', false);
 		}
 	});
+
+
+	// Save Comment
+	$(".addComment").click((e)=>{
+		console.log("clicked");
+	});
+	$("#btnAdd").click((e)=>{
+		console.log("aaa");
+	})
+	
+	
+	function addC(e) {
+		e.preventDefault();
+		console.log("Cliked");
+	}
+
 
 	// Loading step questions
 	function loadStep(stepToShow) {
@@ -80,7 +118,7 @@ $(document).ready(()=>{
 										`+ x[i].question + `
 									</label>
 									<select required class="form-control check-option" name=`+ x[i].q_id +`>
-										<option value="10">10</option>
+										<option value="5">5</option>
 										<option value="1">1</option>
 										<option value="2">2</option>
 										<option value="3">3</option>
@@ -91,7 +129,21 @@ $(document).ready(()=>{
 							`;
 						}
 
+						let stepAttachment = `
+							<fieldset class="form-group border p-2 d-flex flex-column">
+								<legend class="w-auto">Step Attachments</legend>
+								<div>
+									<label>Comment</label>
+									<textarea class="comment form-control" rows="3" placeholder="Add Comment text" maxlength="200"></textarea>
+								</div>
+								<div>
+									<div step-id='`+ stepToShow +`' onclick="addComment(this)" class="btn btn-info mt-3"><i class="fas fa-plus"></i> Add Comment</div>
+								<div>
+							</fieldset>
+						`;
+						output = output + stepAttachment;
 					}
+
 					else {
 						output = "No records found!";
 					}

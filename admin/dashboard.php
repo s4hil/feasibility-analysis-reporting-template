@@ -33,6 +33,9 @@ include 'adminAuth.php';
 	<!-- Font Awesome -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"/>
 
+	<!-- DataTables -->
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+
 </head>
 <body>
 	<?php include '../assets/snippets/sidebar.php'; ?>
@@ -81,11 +84,12 @@ include 'adminAuth.php';
 				</div>
 				<div class="col col-sm-12 col-md-8 col-lg-8">
 					<h2 class="alert alert-info">Questions</h2>
-					<table class="table table-striped">
+					<table class="table table-striped" id="questions-table">
 						<thead class="table-dark text-white">
 							<tr>
 								<th>S.no</th>
 								<th>Question</th>
+								<th>Q.Id</th>
 								<th>Step</th>
 								<th>Action</th>
 							</tr>
@@ -148,6 +152,7 @@ include 'adminAuth.php';
 	</div>
 
 	<script src="../assets/js/jquery.min.js"></script>
+	<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="../assets/js/dashboard.js"></script>
 </body>
