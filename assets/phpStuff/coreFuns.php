@@ -69,4 +69,36 @@
             return false;
         }
     }
+
+    // fetch user email by id
+    function fetchEmailById($id)
+    {
+      global $db;
+      $res = $db->query("SELECT * FROM `_users` WHERE `user_id` = '$id'");
+      if ($res) {
+        $user = $res->fetchArray(SQLITE3_ASSOC);
+        $email = $user['email'];
+        return $email;
+      }
+      else {
+        return false;
+      }
+    }
+
+    // Fetching user comments by user email
+    function fetchUserComments($email)
+    {
+      global $db;
+      $sql = "SELECT * FROM `_comments` WHERE `email` = '$email'";
+      $res = $db->query($sql);
+      if ($res) {
+        while ($row = $res->fetchArray(SQLITE3_ASSOC)) {
+          $data[] = $row; 
+        }
+        return $data;
+      }
+      else {
+        return false;
+      }
+    }
 ?>	

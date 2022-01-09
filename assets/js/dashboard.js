@@ -1,4 +1,8 @@
 $(document).ready(()=>{
+
+	// Set default state of comments box
+	$("#user-comments").hide();
+
 	// Manage navbar
 		let navVisible = false;
 		function manageNavbar() {
@@ -87,7 +91,6 @@ $(document).ready(()=>{
 						}
 						$("#stepsField").html(output);
 					}
-
 				},
 				error: function () {
 					console.log("Err wd fetch options req!");
@@ -242,6 +245,7 @@ $(document).ready(()=>{
 								</tr>`;
 						}
 						$("#submissions-table").html(output);
+						$("#submissions-table-container").dataTable();
 					}
 
 				},
@@ -251,9 +255,11 @@ $(document).ready(()=>{
 			});
 		}
 		loadSubmissions();
+		
 
 		// Display Submission Modal
 		$("#submissions-table").on('click', '.view-btn', function () {
+			$("#user-comments").html("");
 			let id = $(this).attr('user-id');
 			const data = JSON.stringify({ user_id:id });
 			let output = "";
@@ -266,6 +272,7 @@ $(document).ready(()=>{
 					if (data.status == true) {
 						$("#submission-by").html("<i class='fas fa-user'></i> "+ data.userName);
 						$("#score").html("<i class='fas fa-chart-bar'></i> " + data.score);
+						$("#timestamp").html("<i class='fas fa-clock'></i> " + data.timestamp);
 						x = data.data;
 						for(let i = 0; i < x.length; i++){
 							output += `
@@ -278,8 +285,21 @@ $(document).ready(()=>{
 								<hr>
 							`;
 						}
+
+						// Setting up comments
+						let commentsHTML = "";
+						let comments = data.comments; 
+						for (let i = 0; i < comments.length; i++){
+							commentsHTML += `
+								<li>
+									Step `+ comments[i].step_id +` : `+ comments[i].comment +`
+								</li>
+							`;
+						}
+
 						output = "<ul class='questions-list'>"+ output +"</ul>";
 						$("#submission-info").html(output);
+						$("#user-comments").html(commentsHTML);
 						$("#submission-modal").modal('show');
 					}
 				},
@@ -316,4 +336,14 @@ $(document).ready(()=>{
 			}
 		});
 			
+		// Comments Toggle
+		$("#comments-btn").click(function () {
+			$("#user-comments").slideToggle();
+			if ($(this).text() == "Show Comments") {
+				$(this).text("Hide Comments");
+			}
+			else {
+				$(this).text("Show Comments");
+			}
+		});
 });// main

@@ -48,7 +48,7 @@ include 'adminAuth.php';
 			<div class="alert alert-info d-flex justify-content-between header">
 				<h1><i class="fas fa-paperplane"></i> Submissions</h1>
 			</div>
-			<table class="table table-striped">
+			<table style="width: 90vw;" class="table table-striped" id="submissions-table-container">
 				<thead class="table-dark text-white">
 					<tr>
 						<th>S.no</th>
@@ -61,6 +61,7 @@ include 'adminAuth.php';
 					<!-- To be populated by js -->
 				</tbody>
 			</table>
+			
 		</section>
 
 		<section class="tab home-tab" tab-name="questions-tab">
@@ -108,8 +109,16 @@ include 'adminAuth.php';
 	  <div class="modal-dialog modal-xl">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h5 class="modal-title" id="submission-by"></i></h5><h4 id="score"></h4>
-	        </h4>
+	        <h5 class="modal-title" id="submission-by"></h5>
+	        <h3><span id="timestamp"></span></h3>
+	        <h4 id="score"></h4>
+	      </div>
+	      <div id="comments-section" class="p-3">
+	      	<button class="btn btn-info" id="comments-btn">Show Comments <i class="fas fa-arrows-alt-v"></i> </button>
+	      	<div id="user-comments">
+	      		<!-- To be populated by js -->
+	      		<h1>Comments</h1>
+	      	</div>
 	      </div>
 	      <div class="modal-body" id="submission-info">
 	     

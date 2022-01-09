@@ -21,6 +21,7 @@
 	$data = json_decode(file_get_contents("php://input"), true);
 
 	$user_id = clean($data['user_id']);
+	$user_email = fetchEmailById($user_id);
 
 	$sql = "SELECT * FROM `_submissions` WHERE `user_id` = '$user_id' LIMIT 1";
 	$res = $db->query($sql);
@@ -28,6 +29,7 @@
 		$row = $res->fetchArray(SQLITE3_ASSOC);
 		
 		$userResponse = $row['response'];
+		$timestamp = $row['timestamp'];
 
 		$arr = explode('|', $userResponse);
 
@@ -46,6 +48,8 @@
 		$response['userName'] = getUserNameById($user_id);
 		$response['score'] = getResponseScore($userResponse);
 		$response['data'] = $rows;
+		$response['comments'] = fetchUserComments($user_email);
+		$response['timestamp'] = $timestamp;
 
 
 	}
