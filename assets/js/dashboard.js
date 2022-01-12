@@ -208,16 +208,13 @@ $(document).ready(()=>{
 					error: function () {
 						console.log("err wd del question req");
 					}
-
 				});
 			}
 		});
 
 		// Manage tabs
 		$(".nav-list").on('click', '.tab-btn', function () {
-
 			$('.tab').css('display', 'none');
-			
 			let name = $(this).attr('tab-target');
 			$('section[tab-name="' + name + '"]').fadeIn();
 		});
@@ -256,7 +253,6 @@ $(document).ready(()=>{
 		}
 		loadSubmissions();
 		
-
 		// Display Submission Modal
 		$("#submissions-table").on('click', '.view-btn', function () {
 			$("#user-comments").html("");
