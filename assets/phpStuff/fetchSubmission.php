@@ -20,7 +20,8 @@
 
 	$data = json_decode(file_get_contents("php://input"), true);
 
-	$user_id = clean($data['user_id']);
+	// $user_id = clean($data['user_id']);
+	$user_id = 8959;
 	$user_email = fetchEmailById($user_id);
 
 	$sql = "SELECT * FROM `_submissions` WHERE `user_id` = '$user_id' LIMIT 1";

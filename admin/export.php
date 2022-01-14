@@ -72,7 +72,10 @@
 				<table id="exportTable">
 					<thead>
 						<tr>
-							<th></th>
+							<th>User Id</th>
+							<th>Name</th>
+							<th>Email</th>
+							<th>Country</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -84,6 +87,36 @@
 									<td><?php echo $row['name']; ?></td>
 									<td><?php echo $row['email']; ?></td>
 									<td><?php echo $row['country']; ?></td>
+								</tr>
+								<?php
+							}
+						?>
+					</tbody>
+				</table>
+			<?php
+		}
+		elseif($name == "_questions"){
+			?>
+				<table id="exportTable">
+					<thead>
+						<tr>
+							<th>S.no</th>
+							<th>Q Id</th>
+							<th>Question</th>
+							<th>Step Id</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php
+						$count = 1;
+							while ($row = $res->fetchArray(SQLITE3_ASSOC)) {
+								$count++;
+								?>
+								<tr>
+									<td><?php echo $count; ?></td>
+									<td><?php echo $row['q_id']; ?></td>
+									<td><?php echo $row['question']; ?></td>
+									<td><?php echo $row['step_id']; ?></td>
 								</tr>
 								<?php
 							}

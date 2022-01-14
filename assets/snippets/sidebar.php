@@ -29,6 +29,9 @@
 			    <li>
 			    	<a href="export.php?name=users" target="_blank">User Data</a>
 			    </li>
+			    <li>
+			    	<a href="export.php?name=questions" target="_blank">Questions</a>
+			    </li>
 			  </ul>
 			</div>
 		</li>

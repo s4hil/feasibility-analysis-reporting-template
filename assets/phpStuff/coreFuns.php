@@ -89,6 +89,7 @@
     function fetchUserComments($email)
     {
       global $db;
+      $data = array();
       $sql = "SELECT * FROM `_comments` WHERE `email` = '$email'";
       $res = $db->query($sql);
       if ($res) {
