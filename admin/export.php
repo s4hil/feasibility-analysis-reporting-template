@@ -108,7 +108,7 @@
 					</thead>
 					<tbody>
 						<?php
-						$count = 1;
+						$count = 0;
 							while ($row = $res->fetchArray(SQLITE3_ASSOC)) {
 								$count++;
 								?>

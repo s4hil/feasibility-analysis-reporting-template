@@ -468,5 +468,3 @@
     </script>
 </body>
 </html>
-
-<textarea id="comment-" class="form-control" rows="2"></textarea>
